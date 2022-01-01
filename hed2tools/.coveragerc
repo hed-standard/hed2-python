@@ -1,0 +1,12 @@
+[run]
+branch = True
+omit =
+        */__init__.py
+        */hedweb/constants/*
+        */app_factory.py
+        */venv/site-packages/*
+        */tests/*
+
+
+[report]
+skip_empty = true

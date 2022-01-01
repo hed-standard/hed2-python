@@ -1,0 +1,13 @@
+[run]
+branch = True
+omit =
+        */__init__.py
+        ./deploy_hed2/*
+        ./constants/*
+        */app_factory.py
+        ./venv/*
+        *tests/*
+
+
+[report]
+skip_empty = true
