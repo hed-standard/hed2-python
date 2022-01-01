@@ -10,7 +10,7 @@ CONTAINER_NAME="hed2tools"
 GIT_REPO_URL="https://github.com/hed-standard/hed2-python"
 GIT_DIR="${PWD}/hed2-python"
 GIT_REPO_BRANCH="main"
-HOST_PORT=33000
+HOST_PORT=33002
 CONTAINER_PORT=80
 
 DEPLOY_DIR="hed2-python/web2tools/deploy_hed2"
