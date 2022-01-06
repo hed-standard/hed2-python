@@ -28,22 +28,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8
           pip install coverage
-          if [ -f hedtools/requirements.txt ]; then pip install -r hedtools/requirements.txt; fi
-          if [ -f webtools/requirements.txt ]; then pip install -r webtools/requirements.txt; fi
+          if [ -f hed2tools/requirements.txt ]; then pip install -r hed2tools/requirements.txt; fi
+          if [ -f web2tools/requirements.txt ]; then pip install -r web2tools/requirements.txt; fi
           
 
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=hedtools/hed/tools/*
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=hed2tools/hed/tools/*
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude=hedtools/hed/tools/*
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude=hed2tools/hed/tools/*
 
       - name: Test with unittest
         run: |
-          coverage run -m unittest discover -s ./hedtools
-          cp -f ./webtools/config_template.py ./webtools/config.py
-          coverage run -a -m unittest discover -s ./webtools 
+          coverage run -m unittest discover -s ./hed2tools
+          cp -f ./web2tools/config_template.py ./web2tools/config.py
+          coverage run -a -m unittest discover -s ./web2tools 
 
 
       - name: publish-coverages
