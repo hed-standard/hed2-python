@@ -15,7 +15,8 @@ CONTAINER_PORT=80
 
 DEPLOY_DIR="hed2-python/web2tools/deploy_hed2"
 CODE_DEPLOY_DIR="${DEPLOY_DIR}/hed2tools"
-CONFIG_FILE="${ROOT_DIR}/config.py"
+BASE_CONFIG_FILE="${ROOT_DIR}/base_config.py"
+CONFIG_FILE=${CODE_DEPLOY_DIR}/config.py
 WSGI_FILE="${DEPLOY_DIR}/web.wsgi"
 WEB_CODE_DIR="hed2-python/web2tools/hedweb"
 VALIDATOR_CODE_DIR="hed2-python/hed2tools/hed"
@@ -32,8 +33,8 @@ create_web_directory()
 echo Creating hedweb directory...
 echo "Make ${CODE_DEPLOY_DIR}"
 mkdir "${CODE_DEPLOY_DIR}"
-echo "Copy ${CONFIG_FILE} to ${CODE_DEPLOY_DIR}"
-cp "${CONFIG_FILE}" "${CODE_DEPLOY_DIR}"
+echo "Copy ${BASE_CONFIG_FILE} to ${CONFIG_FILE}"
+cp "${BASE_CONFIG_FILE}" ${CONFIG_FILE}"
 echo "Copy ${WSGI_FILE} to ${CODE_DEPLOY_DIR}"
 cp ${WSGI_FILE} "${CODE_DEPLOY_DIR}"
 echo "Copy ${WEB_CODE_DIR} directory to ${CODE_DEPLOY_DIR}"
