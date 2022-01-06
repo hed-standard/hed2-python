@@ -34,9 +34,9 @@ echo Creating hedweb directory...
 echo "Make ${CODE_DEPLOY_DIR}"
 mkdir "${CODE_DEPLOY_DIR}"
 echo "Copy ${BASE_CONFIG_FILE} to ${CONFIG_FILE}"
-cp "${BASE_CONFIG_FILE}" ${CONFIG_FILE}"
+cp "${BASE_CONFIG_FILE}" "${CONFIG_FILE}"
 echo "Copy ${WSGI_FILE} to ${CODE_DEPLOY_DIR}"
-cp ${WSGI_FILE} "${CODE_DEPLOY_DIR}"
+cp "${WSGI_FILE}" "${CODE_DEPLOY_DIR}"
 echo "Copy ${WEB_CODE_DIR} directory to ${CODE_DEPLOY_DIR}"
 cp -r "${WEB_CODE_DIR}" "${CODE_DEPLOY_DIR}"
 echo "Copy ${VALIDATOR_CODE_DIR} directory to ${CODE_DEPLOY_DIR}"
@@ -110,7 +110,7 @@ else
 echo Branch specified... Using "$1" branch
 GIT_REPO_BRANCH="$1"
 fi
-clone_github_repo || error_exit "Cannot clone repo $GIT_REPO_URL branch $GIT_REPO_BRANCH"
+clone_github_repo || error_exit "Cannot clone repo ${GIT_REPO_URL} branch ${GIT_REPO_BRANCH}"
 create_web_directory
 switch_to_web_directory
 build_new_container
