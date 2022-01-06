@@ -16,7 +16,7 @@ CONTAINER_PORT=80
 DEPLOY_DIR="hed2-python/web2tools/deploy_hed2"
 CODE_DEPLOY_DIR="${DEPLOY_DIR}/hed2tools"
 BASE_CONFIG_FILE="${ROOT_DIR}/base_config.py"
-CONFIG_FILE=${CODE_DEPLOY_DIR}/config.py
+CONFIG_FILE="${CODE_DEPLOY_DIR}/config.py"
 WSGI_FILE="${DEPLOY_DIR}/web.wsgi"
 WEB_CODE_DIR="hed2-python/web2tools/hedweb"
 VALIDATOR_CODE_DIR="hed2-python/hed2tools/hed"
@@ -24,46 +24,46 @@ VALIDATOR_CODE_DIR="hed2-python/hed2tools/hed"
 ##### Functions
 
 clone_github_repo(){
-echo Cloning repo ...
+echo "Cloning repo ${GIT_REPO_URL} using ${GIT_REPO_BRANCH} branch"
 git clone $GIT_REPO_URL -b $GIT_REPO_BRANCH
 }
 
 create_web_directory()
 {
 echo Creating hedweb directory...
-echo "Make ${CODE_DEPLOY_DIR}"
+echo "...Making ${CODE_DEPLOY_DIR}"
 mkdir "${CODE_DEPLOY_DIR}"
-echo "Copy ${BASE_CONFIG_FILE} to ${CONFIG_FILE}"
+echo "...Copying ${BASE_CONFIG_FILE} to ${CONFIG_FILE}"
 cp "${BASE_CONFIG_FILE}" "${CONFIG_FILE}"
-echo "Copy ${WSGI_FILE} to ${CODE_DEPLOY_DIR}"
+echo "...Copying ${WSGI_FILE} to ${CODE_DEPLOY_DIR}"
 cp "${WSGI_FILE}" "${CODE_DEPLOY_DIR}"
-echo "Copy ${WEB_CODE_DIR} directory to ${CODE_DEPLOY_DIR}"
+echo "...Copying ${WEB_CODE_DIR} directory to ${CODE_DEPLOY_DIR}"
 cp -r "${WEB_CODE_DIR}" "${CODE_DEPLOY_DIR}"
-echo "Copy ${VALIDATOR_CODE_DIR} directory to ${CODE_DEPLOY_DIR}"
+echo ..."Copying ${VALIDATOR_CODE_DIR} directory to ${CODE_DEPLOY_DIR}"
 cp -r "${VALIDATOR_CODE_DIR}" "${CODE_DEPLOY_DIR}"
 }
 
 switch_to_web_directory()
 {
 echo "Switching to hedweb directory ${DEPLOY_DIR}..."
-cd "${DEPLOY_DIR}" || error_exit "Cannot access $DEPLOY_DIR"
+cd "${DEPLOY_DIR}" || error_exit "Cannot access ${DEPLOY_DIR}"
 }
 
 build_new_container()
 {
-echo "Building new container {$IMAGE_NAME} ..."
+echo "Building new container ${IMAGE_NAME} ..."
 docker build -t $IMAGE_NAME .
 }
 
 delete_old_container()
 {
-echo "Deleting old container {$CONTAINER_NAME} ..."
+echo "Deleting old container ${CONTAINER_NAME} ..."
 docker rm -f $CONTAINER_NAME
 }
 
 run_new_container()
 {
-echo "Running new container {$CONTAINER_NAME} ..."
+echo "Running new container ${CONTAINER_NAME} ..."
 docker run --restart=always --name $CONTAINER_NAME -d -p 127.0.0.1:$HOST_PORT:$CONTAINER_PORT $IMAGE_NAME
 }
 
@@ -84,7 +84,6 @@ output_paths()
 {
 echo "The relevant deployment information is:"
 echo "Root directory: ${ROOT_DIR}"
-echo "Docker image name: $IMAGE_NAME"
 echo "Docker image name: ${IMAGE_NAME}"
 echo "Docker container name: ${CONTAINER_NAME}"
 echo "Git repo: ${GIT_REPO_URL}"
